@@ -190,7 +190,8 @@ int main(int argc, char **argv)
     // -----------------------------
     // Get network info (optional, needed for BPF filter)
     // -----------------------------
-    if (pcap_lookupnet(dev->name, &net, &mask, errbuf) == -1) {
+    if (pcap_lookupnet(dev->name, &net, &mask, errbuf) == -1) 
+    {
         net = 0; mask = 0;
     }
 
@@ -200,7 +201,8 @@ int main(int argc, char **argv)
     // -----------------------------
     printf("Opening %s...\n", dev->name);
     handle = pcap_open_live(dev->name, 65536, 1, 1000, errbuf);
-    if (!handle) {
+    if (!handle) 
+    {
         fprintf(stderr, "Could not open device: %s\n", errbuf);
         return 1;
     }
@@ -208,7 +210,8 @@ int main(int argc, char **argv)
     // -----------------------------
     // Compile and apply TCP filter
     // -----------------------------
-    if (pcap_compile(handle, &fp, "tcp", 0, net) == -1) {
+    if (pcap_compile(handle, &fp, "tcp", 0, net) == -1) 
+    {
         fprintf(stderr, "bad filter: %s\n", pcap_geterr(handle));
         return 1;
     }
@@ -231,4 +234,5 @@ int main(int argc, char **argv)
     pcap_close(handle);
     pcap_freealldevs(alldevs);
     return 0;
+
 }
